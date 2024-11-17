@@ -7,7 +7,7 @@ interface itemProp {
   id: string;
   name: string;
 }
-const todoItem = ({ id, name }: itemProp) => {
+const TodoItem = ({ id, name }: itemProp) => {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   return (
     <li
@@ -28,4 +28,4 @@ const todoItem = ({ id, name }: itemProp) => {
   );
 };
 
-export default todoItem;
+export default TodoItem;

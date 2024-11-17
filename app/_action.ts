@@ -24,6 +24,7 @@ export async function createTodoAction( prevState:{message:string},formData:Form
         revalidatePath("/");
         return { message: `Added todo ${data.name}` };
       } catch (e) {
+        console.error(e);
         return { message: "Failed to create todo" };
       }
 }
@@ -47,6 +48,7 @@ export async function deleteTodoAction (prevState:{message:string},formData:Form
         revalidatePath("/");
         return { message: `delete todo, id: ${data.id}` };
       } catch (e) {
+        console.error(e);
         return { message: "Failed to delete todo" };
       }
 }
@@ -73,6 +75,7 @@ export async function updateTodoAction(prevState:{message:string},formData:FormD
         revalidatePath("/");
         return { message: `update todo, id: ${data.id}` };
       } catch (e) {
+        console.error(e);
         return { message: "Failed to update todo" };
       }
 }

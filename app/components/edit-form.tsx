@@ -8,7 +8,7 @@ interface formProp {
   name: string;
   setIsEdit: Dispatch<SetStateAction<boolean>>;
 }
-const form = ({ id, name, setIsEdit }: formProp) => {
+const Form = ({ id, name, setIsEdit }: formProp) => {
   const [state, formAction] = useActionState(updateTodoAction, { message: "" });
   const handleUpdate = (formData: FormData) => {
     formAction(formData);
@@ -32,4 +32,4 @@ const form = ({ id, name, setIsEdit }: formProp) => {
   );
 };
 
-export default form;
+export default Form;

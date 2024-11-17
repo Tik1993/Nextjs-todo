@@ -2,7 +2,7 @@
 import { useActionState } from "react";
 import { createTodoAction } from "../_action";
 
-const form = () => {
+const Form = () => {
   const [state, formAction] = useActionState(createTodoAction, { message: "" });
   const handleAdd = (formData: FormData) => {
     formAction(formData);
@@ -31,4 +31,4 @@ const form = () => {
   );
 };
 
-export default form;
+export default Form;

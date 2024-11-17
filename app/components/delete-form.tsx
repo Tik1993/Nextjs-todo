@@ -2,7 +2,7 @@
 import { useActionState } from "react";
 import { deleteTodoAction } from "../_action";
 
-const form = ({ id }: { id: string }) => {
+const Form = ({ id }: { id: string }) => {
   const [state, formAction] = useActionState(deleteTodoAction, { message: "" });
   const handleDelete = (formData: FormData) => {
     formAction(formData);
@@ -15,4 +15,4 @@ const form = ({ id }: { id: string }) => {
   );
 };
 
-export default form;
+export default Form;
