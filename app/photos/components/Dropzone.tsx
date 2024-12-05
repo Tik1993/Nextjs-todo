@@ -3,6 +3,7 @@ import { useCallback, useState } from "react";
 import Image from "next/image";
 import { useDropzone, FileRejection } from "react-dropzone";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import { saveToDatabase } from "./_action";
 
 interface DropzoneProps {
   className?: string;
@@ -45,6 +46,7 @@ const Dropzone = ({ className }: DropzoneProps) => {
     onDrop,
     accept: { "image/*": [] },
     maxSize: 1024 * 1000,
+    maxFiles: 1,
   });
 
   const removeFile = (name: string) => {
@@ -54,16 +56,37 @@ const Dropzone = ({ className }: DropzoneProps) => {
   const removeRejected = (name: string) => {
     setRejected((files) => files.filter(({ file }) => file.name !== name));
   };
+
+  const handleRemove = () => {
+    setFiles([]);
+    setRejected([]);
+  };
+
+  async function action() {
+    const file = files[0];
+    await saveToDatabase({ file });
+    setFiles([]);
+    setRejected([]);
+  }
   return (
-    <form>
+    <form action={action}>
       <div {...getRootProps({ className: className })}>
-        <input {...getInputProps()} />
+        <input {...getInputProps({ name: "file" })} />
         {isDragActive ? (
           <p>Drop the files here ...</p>
         ) : (
           <p>Drag 'n' drop some files here, or click to select files</p>
         )}
       </div>
+      <div className="my-2 flex flex-row justify-between">
+        <button type="submit" className="btn btn-primary">
+          Add
+        </button>
+        <button onClick={handleRemove} className="btn btn-secondary">
+          Remove
+        </button>
+      </div>
+
       {/* {Accepted files} */}
       <h3 className="title text-lg font-semibold text-neutral-600 mt-10 border-b pb-3">
         Accepted Files
